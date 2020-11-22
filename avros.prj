@@ -1,0 +1,36 @@
+; ************************************************************
+; PROJECT:
+; AUTHOR:
+; ************************************************************
+
+; Micro + software running
+; ------------------------------------------------------------
+.MICRO "ATmega8"
+.TOOLCHAIN "GCC"
+.GCCPATH   "C:\WinAVR"
+.GCCMAKE   AUTO
+.TARGET    "avros.hex"
+.SOURCE    "proba.c" "scheduler.c" "scheduler.h"
+
+.TRACE              ; Activate micro trace
+
+; Following lines are optional; if not included
+; exactly these values are taken by default
+; ------------------------------------------------------------
+.POWER VDD=5 VSS=0  ; Power nodes
+.CLOCK 1meg         ; Micro clock
+.STORE 250m         ; Trace (micro+signals) storage time
+
+; Micro nodes: RESET, AREF, PB0-PB7, PC0-PC6, PD0-PD7, ACO, TIM1OVF, ADC6, ADC7
+; Define here the hardware around the micro
+; ------------------------------------------------------------
+R1 D1_R1 PD7 6k
+D1 VDD D1_R1
+
+R2 C1_R2 PD0 620
+C1 VDD C1_R2 200u
+
+.PLOT V(D1_R1) V(C1_R2)
+
+
+
